@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load custom_markdown %}
+
+{% block content %}
+    <div class="posts">
+        {% for article in articles %}
+            <section class="post">
+                <header class="post-header">
+                    <h2 class="post-title"><a href="{% url "details" id=article.id %}">{{ article.title }}</a></h2>
+                    <p class="post-meta">
+                        Time:  <a class="post-author" href="#">{{ article.date_time }}</a> <a class="post-category post-category-js" href="#">{{ article.category }}</a>
+                    </p>
+                </header>
+                <div class="post-description">
+                    <p>
+                        {{ article.content|custom_markdown|truncatewords:5 }}
+                    </p>
+                </div>
+                <!-- id=article.id : cannot exist blank before or after '='-->
+                <a class="pure-button" href="{% url "details" id=article.id %}">Read More >>> </a>
+            </section>
+        {% endfor %}
+
+        {% if articles.object_list and articles.paginator.num_pages > 1 %}
+            <div>
+                <ul class="pager">
+                    {% if articles.has_previous %}
+                        <li><a href="?page={{ articles.previous_page_number }}">上一页</a></li>
+                    {% endif %}
+
+                    {% if articles.has_next %}
+                        <li><a href="?page={{ articles.next_page_number }}">下一页</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
