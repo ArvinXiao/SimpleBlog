@@ -1,1 +1,8 @@
-Create a simple blog using Python
+Create a simple blog using Python and Django.
+
+Run the project:
+Preapre: Set python environment.
+
+1. cd myblog
+2. Start a command and type "python manage.py runserver"
+3. Open browse and type " http://127.0.0.1:8000/"
